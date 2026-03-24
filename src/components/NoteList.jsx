@@ -58,11 +58,7 @@ export default function NoteList() {
 
   return (
     <Box>
-      <Box display="flex" alignItems="center" gap={1} mb={2}>
-        <Typography variant="subtitle2" color="text.secondary" fontWeight={600}>
-          {notes.length} {notes.length === 1 ? "مهمة" : "مهام"}
-        </Typography>
-      </Box>
+      
 
       <Divider sx={{ mb: 2 }} />
 

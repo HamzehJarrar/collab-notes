@@ -48,7 +48,6 @@ export default function AddNote({ userName }) {
     >
       <TextField
         fullWidth multiline minRows={2} maxRows={6}
-        placeholder="اكتب ملاحظة جديدة... (Ctrl+Enter للحفظ)"
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -66,7 +65,7 @@ export default function AddNote({ userName }) {
           startIcon={loading ? <CircularProgress size={16} color="inherit" /> : <AddIcon />}
           sx={{ borderRadius: 2, px: 3, textTransform: "none", fontWeight: 600 }}
         >
-          {loading ? "جاري الإضافة..." : "إضافة للمهمات"}
+          {loading ? "جاري الإضافة..." : "إضافة"}
         </Button>
       </Box>
     </Paper>

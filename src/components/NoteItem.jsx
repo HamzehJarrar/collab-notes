@@ -159,7 +159,7 @@ export default function NoteItem({ note }) {
                   size="small" color="error"
                   onClick={handleDelete}
                   disabled={deleting}
-                >
+                > 
                   {deleting
                     ? <CircularProgress size={16} color="error" />
                     : <DeleteIcon fontSize="small" />

@@ -24,7 +24,7 @@ export default function App() {
       <AppBar position="sticky" elevation={0} sx={{ borderBottom: "1px solid", borderColor: "divider", bgcolor: "background.paper" }}>
         <Toolbar>
           <EditNoteIcon sx={{ color: "primary.main", mr: 1 }} />
-          <Typography variant="h6" fontWeight={700} color="text.primary">قائمتي</Typography>
+          <Typography variant="h6" fontWeight={700} color="text.primary">القائمة</Typography>
         </Toolbar>
       </AppBar>
 
