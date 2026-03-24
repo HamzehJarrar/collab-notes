@@ -1,10 +1,3 @@
-// src/components/AddNote.jsx
-// ─────────────────────────────────────────────────────────────
-// Input area where the user types and submits a new note.
-// Writes directly to Firestore — all other clients receive
-// the new note instantly via their onSnapshot listener.
-// ─────────────────────────────────────────────────────────────
-
 import { useState } from "react";
 import {
   Box, TextField, Button, Paper, CircularProgress,
@@ -23,11 +16,12 @@ export default function AddNote({ userName }) {
 
     setLoading(true);
     try {
-      // Each note document stored in Firestore "notes" collection
+      // نستخدم Date.now() كقيمة مبدئية للترتيب لضمان ظهورها في الأسفل
       await addDoc(collection(db, "notes"), {
         text:      trimmed,
-        createdAt: serverTimestamp(),          // server-side UTC timestamp
+        createdAt: serverTimestamp(),
         author:    userName || "Anonymous",
+        order:     Date.now(), // حل مشكلة ReferenceError هنا
       });
       setText("");
     } catch (err) {
@@ -37,7 +31,6 @@ export default function AddNote({ userName }) {
     }
   };
 
-  // Keyboard shortcut: Ctrl+Enter or Cmd+Enter submits
   const handleKeyDown = (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === "Enter") handleAdd();
   };
@@ -55,7 +48,7 @@ export default function AddNote({ userName }) {
     >
       <TextField
         fullWidth multiline minRows={2} maxRows={6}
-        placeholder="Write a new note… (Ctrl+Enter to submit)"
+        placeholder="اكتب ملاحظة جديدة... (Ctrl+Enter للحفظ)"
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -70,17 +63,10 @@ export default function AddNote({ userName }) {
           variant="contained"
           onClick={handleAdd}
           disabled={loading || !text.trim()}
-          startIcon={
-            loading
-              ? <CircularProgress size={16} color="inherit" />
-              : <AddIcon />
-          }
-          sx={{
-            borderRadius: 2, px: 3,
-            textTransform: "none", fontWeight: 600, fontSize: 14,
-          }}
+          startIcon={loading ? <CircularProgress size={16} color="inherit" /> : <AddIcon />}
+          sx={{ borderRadius: 2, px: 3, textTransform: "none", fontWeight: 600 }}
         >
-          {loading ? "Adding…" : "Add Note"}
+          {loading ? "جاري الإضافة..." : "إضافة للمهمات"}
         </Button>
       </Box>
     </Paper>
